@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  flask-server:
+    build:  
+      context: ./flask
+    volumes:
+      - ./flask:/usr/app
+    networks:
+      - app-net
+
+  next-front:
+    build:
+      context: ./next
+    volumes:
+      - /usr/app/node_modules
+      - ./next:/usr/app
+    depends_on:
+      - flask-server
+    networks:
+      - app-net
+
+secrets:
+  postgres-connection:
+    file: ./configs/postgres/secrets.json
+
+networks:
+  app-net:

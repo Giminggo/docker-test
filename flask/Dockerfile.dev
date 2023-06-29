@@ -1,0 +1,18 @@
+FROM python:3.9-slim-buster
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /usr/app
+
+COPY /requirements.txt .
+
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+ENV FLASK_APP main
+ENV FLASK_DEBUG 1
+
+EXPOSE 5000
+
+WORKDIR /usr/app
+
+CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
