@@ -2,6 +2,8 @@ version: '3.7'
 
 services:
   flask-server:
+    build:
+      dockerfile: Dockerfile.test
     ports:
       - "${TEST_SERVER_PORT}:5000"
     restart: on-failure
