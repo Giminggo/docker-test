@@ -1,37 +1,29 @@
-import { atom } from "recoil";
-import { useRecoilState } from "recoil";
-import { RefObject, useRef, useState } from "react";
-
-const testKey = atom({
-  key: 'testKey',
-  default: undefined
-})
+import React, { useState } from 'react';
 
 export default function Test() {
 
-  const inputRef = useRef<RefObject<HTMLInputElement>>(null);
+  const [users, setUsers] = useState<any>(false)
 
-  const [state, setState] = useState(false);
-
-  const [test, setTest] = useRecoilState(testKey)
-
-  console.log(test);
-
-  const loadDjango = async() => {
-    let response = await fetch(`http://localhost:8090/api/test/${inputRef.current.value}/`);
-    if (response.status === 200){
-      setState(true);
-    }
-
+  const showUser = async() => {
+    let response = await fetch('http://localhost:5050/api/users');
+    let data = await response.json()
+    setUsers(data)
   }
+
+  console.log(users);
 
   return (
     <>
-      <h1>hello World</h1>
-      <span>이름을 입력해주세요</span>
-      <input ref={inputRef}></input>
-      <button onClick={loadDjango}>API Test</button>
-      {state && <span>API테스트 성공</span>}
+      {users ? <h1>User Information</h1> : <h1>Show User Information</h1> }
+      <br></br>
+      {typeof(users) !== 'object' ? <button onClick={showUser}>전체 유저 보기</button> : users.map((user:any, index:any) => {
+        return <div key={index}>
+          <h1>{user.username}</h1>
+          <h1>{user.age}</h1>
+          <h1>{user.information}</h1>
+          <br></br>
+        </div>
+      })}
     </>
   )
 }

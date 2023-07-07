@@ -9,7 +9,6 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 ENV FLASK_APP main
 ENV FLASK_DEBUG 1
-# ENV APP_CONFIG_FILE /usr/app/settings/local.py
 
 EXPOSE 5000
 

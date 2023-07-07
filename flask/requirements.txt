@@ -1,3 +1,5 @@
 Flask
 gunicorn
+flask-migrate
+flask-cors
 prometheus-client
