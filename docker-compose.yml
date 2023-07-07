@@ -1,8 +1,8 @@
-version: '3.7'
+version: '3.  .7'
 
 services:
 
-  flask-server:
+  web-api:
     build:  
       context: ./flask
     volumes:
@@ -17,7 +17,7 @@ services:
       - /usr/app/node_modules
       - ./next:/usr/app
     depends_on:
-      - flask-server
+      - web-api
     networks:
       - app-net
 

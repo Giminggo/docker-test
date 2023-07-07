@@ -11,7 +11,7 @@ RUN python3.9 -m venv /usr/app/flask/venv
 ENV PATH="/usr/app/flask/venv/bin:$PATH"
 
 # install requirements
-COPY flask/requirements.txt .
+COPY requirements.txt .
 RUN pip3 install --no-cache-dir wheel
 RUN pip3 install --no-cache-dir -r requirements.txt
 
@@ -20,15 +20,13 @@ FROM ubuntu:20.04 AS runner-image
 RUN apt-get update && apt-get install --no-install-recommends -y python3.9 python3-venv && \
 	apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# use gunicorn WSGI
-
 RUN useradd --create-home myuser
 WORKDIR /usr/app/flask
 
-COPY --from=builder-image usr/app/flask/venv ./venv
 USER myuser
 
-COPY ./flask .
+COPY . .
+COPY --from=builder-image usr/app/flask/venv ./venv
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -37,5 +35,5 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV VIRTUAL_ENV=/usr/app/flask/venv
 ENV PATH="/usr/app/flask/venv/bin:$PATH"
 
-CMD ["gunicorn","-w","2","--bind","0.0.0.0:5000", "wsgi:app"]
-
+# use gunicorn WSGI
+CMD ["gunicorn","-w","2", "--bind","0.0.0.0:5000", "wsgi:app"]
