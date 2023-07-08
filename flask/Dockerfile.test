@@ -20,14 +20,12 @@ FROM ubuntu:20.04 AS runner-image
 RUN apt-get update && apt-get install --no-install-recommends -y python3.9 python3-venv && \
 	apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN useradd --create-home myuser
 WORKDIR /usr/app
-
-USER myuser
 
 COPY . .
 COPY --from=builder-image usr/app/venv ./venv
 
+ENV FLASK_APP manage
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 

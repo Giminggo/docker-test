@@ -5,13 +5,12 @@ services:
     build:
       dockerfile: Dockerfile.test
     container_name: WSGI-flask-web-api
+    volumes: 
+      - ./flask/migrations/postgres:/usr/app/migrations
     ports:
       - "${TEST_SERVER_PORT}:5000"
     environment:
       - APP_CONFIG_FILE=/usr/app/settings/test.py
-    secrets:
-      - source: postgres-connection
-        target: /usr/app/secrets.json
     
   next-front:
     container_name: test-front-web

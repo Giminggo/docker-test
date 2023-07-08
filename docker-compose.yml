@@ -1,12 +1,16 @@
-version: '3.  .7'
+version: '3.7'
 
 services:
 
   web-api:
     build:  
       context: ./flask
+    secrets:
+      - source: postgres-connection
+        target: /usr/app/secrets.json
     networks:
       - app-net
+
 
   next-front:
     build:
