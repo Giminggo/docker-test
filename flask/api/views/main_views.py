@@ -17,3 +17,7 @@ def show_all_user():
       data.append({column.name: getattr(user, column.name) for column in user.__table__.columns})
     
     return jsonify(data)
+
+@bp.route('/test')
+def test():
+  return 'Test!'
