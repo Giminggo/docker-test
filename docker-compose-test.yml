@@ -20,11 +20,11 @@ services:
   db:
     container_name: postgres-db
     image: postgres:15.3
+    restart: unless-stopped
     volumes:
       - ./db/postgres/data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
-    restart: unless-stopped
     ports:
       - "${POST_DB_PORT}:5432"
     networks:

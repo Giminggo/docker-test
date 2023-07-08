@@ -10,8 +10,6 @@ export default function Test() {
     setUsers(data)
   }
 
-  console.log(users);
-
   return (
     <>
       {users ? <h1>User Information</h1> : <h1>Show User Information</h1> }

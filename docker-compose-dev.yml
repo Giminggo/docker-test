@@ -18,6 +18,21 @@ services:
     ports:
       - "${DEV_FRONT_PORT}:3000"
 
+  jenkins-blueocean-master:
+    container_name: jenkins-master
+    
+    build:
+      context: ./jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins/master:/var/jenkins_home
+    restart: on-failure
+    privileged: true
+    networks:
+      - app-net
+
 networks:
   app-net:
     name: dev-net
