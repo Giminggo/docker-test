@@ -28,6 +28,7 @@ USER myuser
 COPY . .
 COPY --from=builder-image usr/app/flask/venv ./venv
 
+
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
