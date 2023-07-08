@@ -5,7 +5,7 @@ export default function Test() {
   const [users, setUsers] = useState<any>(false)
 
   const showUser = async() => {
-    let response = await fetch('http://localhost:6060/api/users');
+    let response = await fetch('http://localhost:5050/api/users');
     let data = await response.json()
     setUsers(data)
   }
