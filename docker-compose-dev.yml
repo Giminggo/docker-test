@@ -7,6 +7,7 @@ services:
     container_name: dev-flask-web-api
     volumes:
       - ./flask:/usr/app
+      - ./flask/migrations/sqlite:/usr/app/migrations
     environment:
       - APP_CONFIG_FILE=/usr/app/settings/local.py
     ports:
