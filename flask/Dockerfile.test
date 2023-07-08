@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y python3.9 pytho
 	apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # package management
-RUN python3.9 -m venv /usr/app/flask/venv
-ENV PATH="/usr/app/flask/venv/bin:$PATH"
+RUN python3.9 -m venv /usr/app/venv
+ENV PATH="/usr/app/venv/bin:$PATH"
 
 # install requirements
 COPY requirements.txt .
@@ -21,20 +21,19 @@ RUN apt-get update && apt-get install --no-install-recommends -y python3.9 pytho
 	apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd --create-home myuser
-WORKDIR /usr/app/flask
+WORKDIR /usr/app
 
 USER myuser
 
 COPY . .
-COPY --from=builder-image usr/app/flask/venv ./venv
-
+COPY --from=builder-image usr/app/venv ./venv
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 # activate virtual environment
-ENV VIRTUAL_ENV=/usr/app/flask/venv
-ENV PATH="/usr/app/flask/venv/bin:$PATH"
+ENV VIRTUAL_ENV=/usr/app/venv
+ENV PATH="/usr/app/venv/bin:$PATH"
 
 # use gunicorn WSGI
-CMD ["gunicorn","-w","2", "--bind","0.0.0.0:5000", "wsgi:app"]
+CMD ["gunicorn","-w","2", "--bind","0.0.0.0:5000", "wsgi:create_app()"]

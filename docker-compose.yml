@@ -5,8 +5,6 @@ services:
   web-api:
     build:  
       context: ./flask
-    volumes:
-      - ./flask:/usr/app
     networks:
       - app-net
 
