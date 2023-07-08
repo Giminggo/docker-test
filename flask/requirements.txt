@@ -2,4 +2,5 @@ Flask
 gunicorn
 flask-migrate
 flask-cors
+psycopg2-binary
 prometheus-client

@@ -1,12 +1,12 @@
 from flask import Blueprint, request, jsonify
-from models.user import User
+from api.models.user import User
 
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/hello')
 def hello():
-    return 'Hello, Pybo!'
+    return 'Hello, World!'
   
 @bp.route('/api/users', methods=['GET'])
 def show_all_user():

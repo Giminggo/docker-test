@@ -1,8 +1,4 @@
-from flask.cli import FlaskGroup
-from .api.main import app
+from api.main import create_app
 
-
-cli = FlaskGroup(app)
-
-if __name__ == "__main__":
-    cli()
+if __name__ == '__main__':
+    create_app().run()
