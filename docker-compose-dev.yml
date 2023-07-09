@@ -31,8 +31,4 @@ services:
     restart: on-failure
     privileged: true
     networks:
-      - app-net
-
-networks:
-  app-net:
-    name: dev-net
+      - default-bridge

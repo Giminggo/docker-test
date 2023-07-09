@@ -9,7 +9,7 @@ services:
       - source: postgres-connection
         target: /usr/app/secrets.json
     networks:
-      - app-net
+      - default-bridge
 
 
   next-front:
@@ -21,11 +21,15 @@ services:
     depends_on:
       - web-api
     networks:
-      - app-net
+      - default-bridge
 
 secrets:
   postgres-connection:
     file: ./configs/postgres/secrets.json
 
 networks:
-  app-net:
+  default-bridge:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.5.0/20

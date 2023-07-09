@@ -4,11 +4,11 @@ from api.models.user import User
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
-@bp.route('/hello')
+@bp.route('hello/')
 def hello():
     return 'Hello, World!'
   
-@bp.route('/api/users', methods=['GET'])
+@bp.route('api/users/', methods=['GET'])
 def show_all_user():
   if request.method == 'GET':
     data = []
