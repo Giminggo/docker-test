@@ -11,7 +11,7 @@ services:
     container_name: nginx
     depends_on: 
       - web-api
-      - next-front
+      - web-front
     networks:
       - default-bridge
 

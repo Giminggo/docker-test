@@ -20,7 +20,6 @@ services:
 
   jenkins-blueocean-master:
     container_name: jenkins-master
-    
     build:
       context: ./jenkins
     ports:
