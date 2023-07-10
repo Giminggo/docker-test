@@ -13,8 +13,8 @@ services:
     ports:
       - "${DEV_SERVER_PORT}:5000"
     
-  next-front:
-    container_name: dev-front-web
+  web-front:
+    container_name: dev-web-front
     ports:
       - "${DEV_FRONT_PORT}:3000"
 

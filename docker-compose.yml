@@ -12,12 +12,14 @@ services:
       - default-bridge
 
 
-  next-front:
+  web-front:
     build:
-      context: ./next
+      context: ./react-front
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - /usr/app/node_modules
-      - ./next:/usr/app
+      - ./react-front:/usr/app
     depends_on:
       - web-api
     networks:

@@ -26,8 +26,8 @@ services:
     environment:
       - APP_CONFIG_FILE=/usr/app/settings/test.py
     
-  next-front:
-    container_name: test-front-web
+  web-front:
+    container_name: test-web-front
     ports:
       - "${TEST_FRONT_PORT}:3000"
 
